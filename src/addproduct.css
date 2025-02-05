@@ -1,0 +1,113 @@
+/* Container for the whole page */
+.add-product-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f7fc;
+  padding: 20px;
+}
+
+.add-product-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box;
+}
+
+/* Form heading */
+.add-product-form h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Form Labels */
+.add-product-form label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #555;
+  display: block;
+}
+
+/* Form inputs */
+.add-product-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+}
+
+/* File input styling */
+.add-product-form input[type="file"] {
+  padding: 10px;
+  cursor: pointer;
+}
+
+/* Submit button */
+.add-product-form button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-product-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .add-product-form {
+    padding: 15px;
+  }
+
+  .add-product-form h1 {
+    font-size: 1.5rem;
+  }
+
+  .add-product-form label {
+    font-size: 0.9rem;
+  }
+
+  .add-product-form input {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .add-product-form button {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .add-product-form {
+    padding: 12px;
+  }
+
+  .add-product-form h1 {
+    font-size: 1.2rem;
+  }
+
+  .add-product-form input {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .add-product-form button {
+    font-size: 0.95rem;
+  }
+}
