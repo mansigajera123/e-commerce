@@ -15,13 +15,16 @@ export default function ResetPassword() {
       return;
     }
 
-    fetch(`https://pink-places-build.loca.lt/reset-password/${token}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ password }),
-    })
+    fetch(
+      `https://outside-friend-jump-convicted.trycloudflare.com/reset-password/${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ password }),
+      }
+    )
       .then((res) => res.json())
       .then((user) => {
         console.log(user);

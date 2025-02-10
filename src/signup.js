@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./header";
-import "./signup.css"; // Make sure to import the CSS file
+import "./css/signup.css";
 
 export default function SignUp() {
   const [userData, setUserData] = useState({
@@ -24,7 +24,7 @@ export default function SignUp() {
 
   const signUp = (e) => {
     e.preventDefault();
-    fetch(`https://pink-places-build.loca.lt/signup`, {
+    fetch(`https://outside-friend-jump-convicted.trycloudflare.com/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
@@ -83,6 +83,9 @@ export default function SignUp() {
           <button type="submit" className="signup-btn">
             Sign Up
           </button>
+          <br />
+          <br />
+          Already have an Account? <Link to="/login"> Log in</Link>
         </form>
       </div>
     </>

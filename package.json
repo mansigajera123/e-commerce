@@ -8,6 +8,7 @@
     "@stripe/stripe-js": "^5.6.0",
     "cra-template": "1.2.0",
     "jwt-decode": "^3.1.2",
+    "lucide-react": "^0.474.0",
     "nodemailer": "^6.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

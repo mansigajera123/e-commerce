@@ -1,0 +1,63 @@
+/* Profiler.css */
+
+/* Center the form in the page */
+.profile-container {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Form card */
+.profile-form-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Heading */
+.profile-heading {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
+}
+
+/* Form fields */
+.profile-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Focus effect on input */
+.profile-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Submit button */
+.profile-submit-btn {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Hover effect */
+.profile-submit-btn:hover {
+  background: #0056b3;
+}

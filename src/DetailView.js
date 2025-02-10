@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "./header";
-import "./detail.css";
+import "./css/detail.css";
 
 export default function DetailView() {
   const [product, setProduct] = useState({});
@@ -10,13 +10,17 @@ export default function DetailView() {
   const [rating, setRating] = useState(1);
   const [reviewText, setReviewText] = useState("");
   const [averageRating, setAverageRating] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const detailsView = () => {
       const token = localStorage.getItem("authToken");
-      fetch(`https://pink-places-build.loca.lt/detail/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      fetch(
+        `https://outside-friend-jump-convicted.trycloudflare.com/detail/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
         .then((res) => res.json())
         .then((product) => {
           setProduct(product);
@@ -34,7 +38,7 @@ export default function DetailView() {
   const addtoCart = (productId, quantity = 1) => {
     const token = localStorage.getItem("authToken");
 
-    fetch(`https://pink-places-build.loca.lt/addtocart`, {
+    fetch(`https://outside-friend-jump-convicted.trycloudflare.com/addtocart`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -49,14 +53,17 @@ export default function DetailView() {
   const handleSubmitReview = () => {
     const token = localStorage.getItem("authToken");
 
-    fetch(`https://pink-places-build.loca.lt/${id}/reviews`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ rating, reviewText }),
-    })
+    fetch(
+      `https://outside-friend-jump-convicted.trycloudflare.com/${id}/reviews`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating, reviewText }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setReviews([...reviews, data.product.reviews.pop()]);
@@ -70,22 +77,53 @@ export default function DetailView() {
       .catch((err) => console.log(err));
   };
 
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <Header />
       <div className="detail-view-container">
         <h1 className="product-title">{product.title}</h1>
         <img
-          src={`https://pink-places-build.loca.lt/${product.image}`}
+          src={`https://outside-friend-jump-convicted.trycloudflare.com/${product.image}`}
           alt={product.title}
           className="product-image"
+          onClick={handleImageClick}
         />
+
+        {isModalOpen && (
+          <div className="modal" onClick={handleCloseModal}>
+            <div className="modal-content">
+              <span className="close" onClick={handleCloseModal}>
+                &times;
+              </span>
+              <img
+                src={`https://outside-friend-jump-convicted.trycloudflare.com/${product.image}`}
+                alt={product.title}
+                className="modal-image"
+              />
+            </div>
+          </div>
+        )}
+
         <h2 className="product-price">₹{product.price}</h2>
         <p className="product-description">{product.description}</p>
         <p className="product-category">
           <strong>Category: </strong>
           {product.category}
         </p>
+        <p className="added-by">
+          <strong>Added by: </strong>
+          {product.userId?.email || "Unknown"}
+        </p>
+
+        <br />
         <Link to="/cart">
           <button
             className="back-button"

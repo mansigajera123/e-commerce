@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./addproduct.css";
+import "./css/addproduct.css";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "./header";
 
@@ -16,12 +16,15 @@ export default function EditProduct() {
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    fetch(`https://pink-places-build.loca.lt/detail/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      `https://outside-friend-jump-convicted.trycloudflare.com/detail/${id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -54,12 +57,15 @@ export default function EditProduct() {
     formData.append("category", productData.category);
     formData.append("description", productData.description);
     formData.append("image", productData.image);
-    fetch(`https://pink-places-build.loca.lt/edit/${id}`, {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${token}` },
+    fetch(
+      `https://outside-friend-jump-convicted.trycloudflare.com/edit/${id}`,
+      {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
 
-      body: formData,
-    })
+        body: formData,
+      }
+    )
       .then((res) => res.json())
       .then((user) => {
         setproductData({

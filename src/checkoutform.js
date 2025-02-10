@@ -6,7 +6,7 @@ import {
   CardExpiryElement,
   CardCvcElement,
 } from "@stripe/react-stripe-js";
-import "./checkoutForm.css";
+import "./css/checkoutForm.css";
 import { useNavigate } from "react-router-dom";
 
 function CheckoutForm({ amount }) {
@@ -22,7 +22,7 @@ function CheckoutForm({ amount }) {
     setPaymentProcessing(true);
 
     const response = await fetch(
-      `https://pink-places-build.loca.lt/payment-intent`,
+      `https://outside-friend-jump-convicted.trycloudflare.com/payment-intent`,
       {
         method: "POST",
         body: JSON.stringify({ amount }),

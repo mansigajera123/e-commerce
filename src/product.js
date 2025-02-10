@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./product.css";
+import "./css/product.css";
 import { Link } from "react-router-dom";
 import Header from "./header";
 
@@ -9,9 +9,12 @@ export default function Product() {
   useEffect(() => {
     const getProduct = () => {
       const token = localStorage.getItem("authToken");
-      fetch("https://pink-places-build.loca.lt/product/", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      fetch(
+        "https://outside-friend-jump-convicted.trycloudflare.com/product/",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
         .then((res) => res.json())
         .then((product) => {
           setProduct(product);
@@ -24,10 +27,13 @@ export default function Product() {
   const deleteProduct = (id) => {
     const token = localStorage.getItem("authToken");
 
-    fetch(`https://pink-places-build.loca.lt/delete/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      `https://outside-friend-jump-convicted.trycloudflare.com/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then(() => {
         setProduct((prevProduct) =>
@@ -46,7 +52,7 @@ export default function Product() {
           {product.map((item) => (
             <div key={item._id} className="product-card">
               <img
-                src={`https://pink-places-build.loca.lt/${item.image}`}
+                src={`https://outside-friend-jump-convicted.trycloudflare.com/${item.image}`}
                 alt={item.title}
                 loading="lazy"
               />

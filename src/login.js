@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./header";
-import "./login.css";
+import "./css/login.css";
 
 export default function Login() {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
 
   const navigate = useNavigate();
 
@@ -22,7 +26,7 @@ export default function Login() {
 
   const login = (e) => {
     e.preventDefault();
-    fetch(`https://pink-places-build.loca.lt/login`, {
+    fetch(`https://outside-friend-jump-convicted.trycloudflare.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +62,6 @@ export default function Login() {
           onChange={(e) => dataHandler("email", e.target.value)}
           required
         />
-
         <label htmlFor="password" className="label">
           Password
         </label>
@@ -69,11 +72,12 @@ export default function Login() {
           onChange={(e) => dataHandler("password", e.target.value)}
           required
         />
-
         <button type="submit" className="submit-button">
           Login
         </button>
-        {/* <Link to="/forgot-password">Forgot Password?</Link> */}
+        <br />
+        <br />
+        Don't have an Account? <Link to="/signup">Sign Up</Link>
       </form>
     </>
   );

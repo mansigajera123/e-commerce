@@ -11,6 +11,11 @@ import AllProduct from "./AllProduct";
 import ForgotPassword from "./forgotPAssword";
 import ResetPassword from "./resetpassword";
 import Payment from "./payment";
+import FavoriteProducts from "./favouriteProduct";
+import Profile from "./profile";
+import ProfileData from "./profileData";
+import Orders from "./order";
+import MakeOrder from "./makeorder";
 
 function App() {
   const router = createBrowserRouter([
@@ -61,6 +66,26 @@ function App() {
     {
       path: "/payment",
       element: <Payment />,
+    },
+    {
+      path: "/favorites",
+      element: <FavoriteProducts />,
+    },
+    {
+      path: "/update-profile",
+      element: <Profile />,
+    },
+    {
+      path: "/profile",
+      element: <ProfileData />,
+    },
+    {
+      path: "/orders",
+      element: <Orders />,
+    },
+    {
+      path: "/Makeorder",
+      element: <MakeOrder />,
     },
   ]);
   return (

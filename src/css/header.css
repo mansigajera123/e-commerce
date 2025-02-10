@@ -13,7 +13,7 @@ body {
 
 /* Header Container */
 .header {
-  background-color: #2c3e50;
+  background-color: #061f38;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -88,4 +88,20 @@ nav {
     font-size: 16px;
     padding: 8px 12px;
   }
+}
+.profile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background-color: white;
+  border: 2px solid #2980b9;
+  transition: transform 0.3s ease;
+  margin-left: 800px;
+}
+
+.profile-icon:hover {
+  transform: scale(1.1);
 }

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import "./header.css";
+import { UserCircle } from "lucide-react"; 
+import "./css/header.css";
 
 export default function Header() {
   const logout = () => {
@@ -10,12 +11,29 @@ export default function Header() {
 
   return (
     <>
-      <h1>E-Commerce Website</h1>
       <header className="header">
         <nav>
           {localStorage.getItem("authToken") ? (
             <>
-              welcome,{email.split("@")[0]}
+              <p
+                style={{
+                  color: "#2980b9",
+                  backgroundColor: "white",
+                  textAlign: "center",
+                  FontSize: "2000",
+                  padding: "20px 15px",
+                }}
+              >
+                Welcome,
+                {
+                  email
+                    .split("@")[0]
+                    .replace(/[0-9]/g, "")
+                    .split(".")[0]
+                    .split(/[0-9]+/)[0]
+                }
+              </p>
+
               <Link to="/allproduct" className="nav-link">
                 All Product
               </Link>
@@ -26,10 +44,30 @@ export default function Header() {
                 Add Product
               </Link>
               <Link to="/cart" className="nav-link">
-                cart
+                Cart
               </Link>
+              <Link to="/favorites" className="nav-link">
+                Favorites
+              </Link>
+              <Link to="/orders" className="nav-link">
+                My Orders
+              </Link>
+
               <Link to="/" className="nav-link" onClick={logout}>
-                logout
+                Logout
+              </Link>
+              <Link to="/profile" className="profile-icon">
+                <div>
+                  <br />
+                  <UserCircle size={40} color="#2980b9" />
+                  <p
+                    style={{
+                      color: "white",
+                    }}
+                  >
+                    profile
+                  </p>
+                </div>
               </Link>
             </>
           ) : (

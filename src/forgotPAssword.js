@@ -6,13 +6,16 @@ export default function ForgotPassword() {
   const handleClick = (e) => {
     e.preventDefault();
 
-    fetch(`https://pink-places-build.loca.lt/forgot-password/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
-    })
+    fetch(
+      `https://outside-friend-jump-convicted.trycloudflare.com/forgot-password/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }
+    )
       .then((res) => res.json())
       .catch((err) => console.log(err));
   };

@@ -184,18 +184,34 @@ select {
   }
 }
 
-/* Favorite Star Button */
-.favorite-button {
+/* Favorite Star Icon */
+.favorite-icon {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 1.2rem;
-  color: #ccc;
+  top: 8px;
+  right: 8px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-.favorite-button.favorited {
-  color: gold;
+.favorite-icon {
+  cursor: pointer;
+  color: gray;
+  transition: color 0.3s ease; /* Default color for non-favorite */
+}
+
+.favorite-icon.favorited {
+  color: yellow;
+  background-color: yellow; /* Color for favorite */
+}
+
+.favorite-icon.favorited svg {
+  color: white;
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./header";
+import "./css/addproduct.css";
 
 export default function AddProduct() {
   const [productData, setProductData] = useState({
@@ -30,11 +31,14 @@ export default function AddProduct() {
     formData.append("category", productData.category);
     formData.append("image", productData.image);
 
-    fetch("https://pink-places-build.loca.lt/addproduct", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    })
+    fetch(
+      "https://outside-friend-jump-convicted.trycloudflare.com/addproduct",
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      }
+    )
       .then((res) => res.json())
       .then(() => {
         setProductData({
@@ -102,6 +106,9 @@ export default function AddProduct() {
             <option value="Electronics">Electronics</option>
             <option value="Clothing">Clothing</option>
             <option value="Accessories">Accessories</option>
+            <option value="Kids">Kids</option>
+            <option value="Kitchen Item">Kitchen Item</option>
+            <option value="Beauty Product">Beauty Product</option>
           </select>
 
           <button type="submit">Add Product</button>

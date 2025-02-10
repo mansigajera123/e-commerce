@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./product.css";
+import "./css/product.css";
 import { Link } from "react-router-dom";
 import Header from "./header";
 import { FaStar } from "react-icons/fa";
@@ -11,11 +11,11 @@ export default function AllProduct() {
   const [totalPages, setTotalPages] = useState(1);
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState(new Set());
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-
     const searchParam = searchQuery ? `&search=${searchQuery}` : "";
     const categoryParam = category ? `&category=${category}` : "";
     let minPrice = 0,
@@ -36,7 +36,7 @@ export default function AllProduct() {
     const priceParam = maxPrice
       ? `&minPrice=${minPrice}&maxPrice=${maxPrice}`
       : `&minPrice=${minPrice}`;
-    const url = `https://pink-places-build.loca.lt/allproduct?page=${currentPage}${searchParam}${categoryParam}${priceParam}`;
+    const url = `https://outside-friend-jump-convicted.trycloudflare.com/allproduct?page=${currentPage}${searchParam}${categoryParam}${priceParam}`;
 
     fetch(url, {
       headers: {
@@ -46,11 +46,24 @@ export default function AllProduct() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setProduct(data.product);
         setTotalPages(data.totalPages);
       })
       .catch((err) => console.log("Error fetching products:", err));
+
+    fetch(`https://outside-friend-jump-convicted.trycloudflare.com/favorites`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const favoriteProductIds = new Set(
+          data.favorites.map((fav) => fav._id)
+        );
+        setFavorites(favoriteProductIds);
+      })
+      .catch((err) => console.log("Error fetching favorites:", err));
   }, [currentPage, searchQuery, category, priceRange]);
 
   const handleSearchChange = (e) => {
@@ -72,18 +85,61 @@ export default function AllProduct() {
     setPriceRange(e.target.value);
   };
 
-  const toggleFavorite = (id) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(id)
-        ? prevFavorites.filter((favId) => favId !== id)
-        : [...prevFavorites, id]
-    );
+  const toggleFavorite = async (id) => {
+    try {
+      const token = localStorage.getItem("authToken");
+      const isCurrentlyFavorite = favorites.has(id);
+
+      const response = await fetch(
+        `https://outside-friend-jump-convicted.trycloudflare.com/toggle-favorite/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ isFavorite: !isCurrentlyFavorite }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setFavorites((prev) => {
+          const updatedFavorites = new Set(prev);
+          if (isCurrentlyFavorite) {
+            updatedFavorites.delete(id);
+          } else {
+            updatedFavorites.add(id);
+          }
+          return updatedFavorites;
+        });
+      } else {
+        console.error("Error updating favorite:", data.message);
+      }
+    } catch (error) {
+      console.error("Error toggling favorite:", error);
+    }
   };
+
+  useEffect(() => {
+    const getUser = () => {
+      const token = localStorage.getItem("authToken");
+      fetch("https://outside-friend-jump-convicted.trycloudflare.com/user", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((user) => {
+          setUser(user);
+        })
+        .catch((err) => console.log(err));
+    };
+    getUser();
+  }, []);
 
   return (
     <>
       <Header />
-
       <input
         type="text"
         value={searchQuery}
@@ -99,6 +155,9 @@ export default function AllProduct() {
         <option value="Electronics">Electronics</option>
         <option value="Clothing">Clothing</option>
         <option value="Accessories">Accessories</option>
+        <option value="Kids">Kids</option>
+        <option value="Kitchen Item">Kitchen Item</option>
+        <option value="Beauty Product">Beauty Product</option>
       </select>
 
       <select onChange={handlePriceChange} value={priceRange}>
@@ -115,16 +174,19 @@ export default function AllProduct() {
           {product.length > 0 ? (
             product.map((item) => (
               <div key={item._id} className="product-card">
-                {/* <button
-                  className={`favorite-button ${
-                    favorites.includes(item._id) ? "favorited" : ""
-                  }`}
+                <span
+                  className="favorite-icon"
                   onClick={() => toggleFavorite(item._id)}
+                  style={{
+                    color: favorites.has(item._id) ? "yellow" : "gray",
+                    cursor: "pointer",
+                  }}
                 >
                   <FaStar />
-                </button> */}
+                </span>
+
                 <img
-                  src={`https://pink-places-build.loca.lt/${item.image}`}
+                  src={`https://outside-friend-jump-convicted.trycloudflare.com/${item.image}`}
                   loading="lazy"
                   alt={item.title}
                 />

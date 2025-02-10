@@ -1,29 +1,26 @@
 import { useEffect, useState } from "react";
-import "./cart.css";
+import "./css/cart.css";
 import Header from "./header";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const [cart, setCart] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { message } = location.state || {};
 
   useEffect(() => {
     const getCart = () => {
       const token = localStorage.getItem("authToken");
 
-      fetch("https://pink-places-build.loca.lt/cart", {
+      fetch("https://outside-friend-jump-convicted.trycloudflare.com/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
         .then((res) => res.json())
-        .then((cartData) => {
-          if (cartData && cartData.items) {
-            setCart(cartData.items);
-            const total = cartData.items.reduce(
+        .then((d) => {
+          if (d && d.items) {
+            setCart(d.items);
+            const total = d.items.reduce(
               (acc, item) => acc + item.productId.price * item.quantity,
               0
             );
@@ -39,34 +36,7 @@ export default function Cart() {
     };
 
     getCart();
-  }, [message, cart]);
-
-  const handleOrder = () => {
-    const token = localStorage.getItem("authToken");
-    fetch(`https://pink-places-build.loca.lt/order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ items: cart }),
-    })
-      .then((res) => res.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "order.pdf";
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const handlePayment = () => {
-    navigate("/payment", { state: { totalPrice } });
-  };
+  }, [cart]);
 
   if (cart === null) {
     return <h1 className="loading">Loading...</h1>;
@@ -88,7 +58,7 @@ export default function Cart() {
                 <p className="product-price">Price: ₹{item.productId.price}</p>
               </div>
               <img
-                src={`https://pink-places-build.loca.lt/${item.productId.image}`}
+                src={`https://outside-friend-jump-convicted.trycloudflare.com/${item.productId.image}`}
                 loading="lazy"
                 alt={item.productId.title}
                 className="product-image"
@@ -97,25 +67,17 @@ export default function Cart() {
           ))}
         </ul>
       )}
-      <br />
+
       <div className="cart-total">
         <h3>Total Price: ₹{totalPrice}</h3>
       </div>
-      <button
-        className="btn"
-        type="order"
-        onClick={handleOrder}
-        disabled={totalPrice <= 0}
-      >
-        Bill
-      </button>
-      <button
-        className="btn"
-        onClick={handlePayment}
-        disabled={totalPrice <= 0}
-      >
-        Proceed to Payment
-      </button>
+      <br />
+      <br />
+      <div className="button-container">
+        <Link to="/Makeorder">
+          <button className="btn">Order</button>
+        </Link>
+      </div>
     </>
   );
 }

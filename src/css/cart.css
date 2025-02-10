@@ -4,6 +4,8 @@ body {
   background-color: #f9f9f9;
   margin: 0;
   padding: 0;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;
 }
 
 h1,
@@ -92,6 +94,7 @@ header {
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.3s ease;
+  justify-content: center;
 }
 
 .btn:hover {
@@ -99,7 +102,7 @@ header {
 }
 
 .btn[type="order"] {
-  background-color: #007bff;
+  background-color: #334c69;
 }
 
 .btn[type="order"]:hover {
@@ -167,4 +170,11 @@ header {
   .btn {
     font-size: 1.1rem;
   }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Centers the button horizontally */
+  align-items: center;     /* Centers the button vertically */
+  height: 100%;             /* Optional: ensures the container takes up full height */
 }
