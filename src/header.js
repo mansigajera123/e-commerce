@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { UserCircle } from "lucide-react"; 
+import { UserCircle } from "lucide-react";
 import "./css/header.css";
 
 export default function Header() {
@@ -15,15 +15,7 @@ export default function Header() {
         <nav>
           {localStorage.getItem("authToken") ? (
             <>
-              <p
-                style={{
-                  color: "#2980b9",
-                  backgroundColor: "white",
-                  textAlign: "center",
-                  FontSize: "2000",
-                  padding: "20px 15px",
-                }}
-              >
+              <p style={{}}>
                 Welcome,
                 {
                   email
@@ -60,13 +52,13 @@ export default function Header() {
                 <div>
                   <br />
                   <UserCircle size={40} color="#2980b9" />
-                  <p
+                  <h4
                     style={{
                       color: "white",
                     }}
                   >
                     profile
-                  </p>
+                  </h4>
                 </div>
               </Link>
             </>

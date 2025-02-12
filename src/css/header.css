@@ -10,7 +10,13 @@
 body {
   font-family: "Arial", sans-serif;
 }
-
+p {
+  color: blue;
+  background-color: white;
+  text-align: center;
+  font-size: 2000;
+  padding: 20px 15px;
+}
 /* Header Container */
 .header {
   background-color: #061f38;

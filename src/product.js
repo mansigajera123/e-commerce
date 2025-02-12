@@ -9,12 +9,9 @@ export default function Product() {
   useEffect(() => {
     const getProduct = () => {
       const token = localStorage.getItem("authToken");
-      fetch(
-        "https://outside-friend-jump-convicted.trycloudflare.com/product/",
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      fetch("https://logos-annex-qualifying-bob.trycloudflare.com/product/", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
         .then((res) => res.json())
         .then((product) => {
           setProduct(product);
@@ -27,13 +24,10 @@ export default function Product() {
   const deleteProduct = (id) => {
     const token = localStorage.getItem("authToken");
 
-    fetch(
-      `https://outside-friend-jump-convicted.trycloudflare.com/delete/${id}`,
-      {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    )
+    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/delete/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    })
       .then((res) => res.json())
       .then(() => {
         setProduct((prevProduct) =>
@@ -52,7 +46,7 @@ export default function Product() {
           {product.map((item) => (
             <div key={item._id} className="product-card">
               <img
-                src={`https://outside-friend-jump-convicted.trycloudflare.com/${item.image}`}
+                src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.image}`}
                 alt={item.title}
                 loading="lazy"
               />

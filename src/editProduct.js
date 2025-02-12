@@ -16,15 +16,12 @@ export default function EditProduct() {
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    fetch(
-      `https://outside-friend-jump-convicted.trycloudflare.com/detail/${id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/detail/${id}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -57,15 +54,12 @@ export default function EditProduct() {
     formData.append("category", productData.category);
     formData.append("description", productData.description);
     formData.append("image", productData.image);
-    fetch(
-      `https://outside-friend-jump-convicted.trycloudflare.com/edit/${id}`,
-      {
-        method: "PUT",
-        headers: { Authorization: `Bearer ${token}` },
+    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/edit/${id}`, {
+      method: "PUT",
+      headers: { Authorization: `Bearer ${token}` },
 
-        body: formData,
-      }
-    )
+      body: formData,
+    })
       .then((res) => res.json())
       .then((user) => {
         setproductData({
@@ -124,7 +118,13 @@ export default function EditProduct() {
             <option value="Electronics">Electronics</option>
             <option value="Clothing">Clothing</option>
             <option value="Accessories">Accessories</option>
+            <option value="Kids">Kids</option>
+            <option value="Kitchen Item">Kitchen Item</option>
+            <option value="Beauty Product">Beauty Product</option>
           </select>
+          <br />
+          <br />
+
           <button type="submit">Add Product</button>
         </form>
       </div>

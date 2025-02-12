@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/profile.css";
 import Header from "./header";
@@ -12,6 +12,36 @@ export default function Profiler() {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      const token = localStorage.getItem("authToken");
+
+      try {
+        const response = await fetch(
+          "https://logos-annex-qualifying-bob.trycloudflare.com/get-profile",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch profile data");
+        }
+
+        const data = await response.json();
+        setProfileData(data);
+      } catch (error) {
+        alert("Failed to fetch profile data.");
+      }
+    };
+
+    fetchProfileData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -32,7 +62,7 @@ export default function Profiler() {
 
     try {
       const response = await fetch(
-        "https://outside-friend-jump-convicted.trycloudflare.com/update-profile",
+        "https://logos-annex-qualifying-bob.trycloudflare.com/update-profile",
         {
           method: "PUT",
           headers: {
@@ -46,11 +76,15 @@ export default function Profiler() {
         throw new Error("Failed to update profile");
       }
       navigate("/profile");
-      alert("Profile updated successfully!");
+      // alert("Profile updated successfully!");
     } catch (error) {
       console.error("Error updating profile", error);
       alert("Failed to update profile. Please try again.");
     }
+  };
+
+  const handleCancle = () => {
+    navigate("/profile");
   };
 
   return (
@@ -96,6 +130,7 @@ export default function Profiler() {
               Update Profile
             </button>
           </form>
+          <button onClick={handleCancle}>Cancle</button>
         </div>
       </div>
     </>

@@ -16,7 +16,7 @@ export default function ResetPassword() {
     }
 
     fetch(
-      `https://outside-friend-jump-convicted.trycloudflare.com/reset-password/${token}`,
+      `https://logos-annex-qualifying-bob.trycloudflare.com/reset-password/${token}`,
       {
         method: "POST",
         headers: {
@@ -44,7 +44,7 @@ export default function ResetPassword() {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="password">New Password:</label>
+        <label htmlFor="password">New password:</label>
         <input
           type="password"
           name="password"
@@ -52,7 +52,7 @@ export default function ResetPassword() {
           required
         />
         <br />
-        <label htmlFor="confirmPassword">Confirm New Password:</label>
+        <label htmlFor="confirmPassword">Confirm New password:</label>
         <input
           type="password"
           name="confirmPassword"
@@ -60,7 +60,7 @@ export default function ResetPassword() {
           required
         />
         <br />
-        <button type="submit">Reset Password</button>
+        <button type="submit">Reset password</button>
       </form>
     </>
   );

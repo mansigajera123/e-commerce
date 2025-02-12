@@ -9,21 +9,48 @@ export default function Orders() {
     const fetchOrders = () => {
       const token = localStorage.getItem("authToken");
 
-      fetch(
-        "https://outside-friend-jump-convicted.trycloudflare.com/my-orders",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      fetch("https://logos-annex-qualifying-bob.trycloudflare.com/my-orders", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((res) => res.json())
-        .then((data) => setOrders(data))
+        .then((data) => {
+          const successfulOrders = data.filter(
+            (order) => order.paymentStatus === "success"
+          );
+          setOrders(successfulOrders);
+        })
         .catch((err) => console.log(err));
     };
 
     fetchOrders();
   }, []);
+
+  const generatePdf = (id) => {
+    const token = localStorage.getItem("authToken");
+
+    fetch(
+      `https://logos-annex-qualifying-bob.trycloudflare.com/order-invoice/${id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to fetch invoice");
+        return response.blob();
+      })
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `order-${id}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => console.error("Error downloading invoice:", error));
+  };
 
   return (
     <>
@@ -41,7 +68,7 @@ export default function Orders() {
                 {order.products.map((item, index) => (
                   <li key={index}>
                     <img
-                      src={`https://outside-friend-jump-convicted.trycloudflare.com/${item.product.image}`}
+                      src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.product.image}`}
                       alt={item.product.title}
                       width="50"
                     />
@@ -52,6 +79,12 @@ export default function Orders() {
                   </li>
                 ))}
               </ul>
+              <button
+                className="invoice-button"
+                onClick={() => generatePdf(order._id)}
+              >
+                Download Invoice
+              </button>
             </li>
           ))}
         </ul>

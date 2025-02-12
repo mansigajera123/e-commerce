@@ -22,7 +22,7 @@ function CheckoutForm({ amount }) {
     setPaymentProcessing(true);
 
     const response = await fetch(
-      `https://outside-friend-jump-convicted.trycloudflare.com/payment-intent`,
+      `https://logos-annex-qualifying-bob.trycloudflare.com/payment-intent`,
       {
         method: "POST",
         body: JSON.stringify({ amount }),
@@ -33,7 +33,8 @@ function CheckoutForm({ amount }) {
     );
     const data = await response.json();
     const clientSecret = data.clientSecret;
-
+    const orderId = data._id;
+    console.log(orderId);
     const { error, paymentIntent } = await stripe.confirmCardPayment(
       clientSecret,
       {
@@ -47,13 +48,30 @@ function CheckoutForm({ amount }) {
     );
 
     if (error) {
-      console.log(error.message);
       setPaymentProcessing(false);
     } else {
       if (paymentIntent.status === "succeeded") {
         alert("Payment successful!");
+
         setPaymentProcessing(false);
-        navigate("/cart", { state: { message: "payment successful" } });
+        navigate("/Makeorder", { state: { message: "payment successful" } });
+        const confirmResponse = await fetch(
+          "https://logos-annex-qualifying-bob.trycloudflare.com/confirm-order",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+            body: JSON.stringify({ message: "payment successful", orderId }),
+          }
+        );
+
+        const confirmData = await confirmResponse.json();
+
+        if (!confirmResponse.ok) {
+          throw new Error(confirmData.message || "Failed to confirm payment");
+        }
       }
     }
   };

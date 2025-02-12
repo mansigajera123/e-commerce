@@ -7,7 +7,7 @@ export default function ForgotPassword() {
     e.preventDefault();
 
     fetch(
-      `https://outside-friend-jump-convicted.trycloudflare.com/forgot-password/`,
+      `https://logos-annex-qualifying-bob.trycloudflare.com/forgot-password/`,
       {
         method: "POST",
         headers: {

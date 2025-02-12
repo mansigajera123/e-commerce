@@ -26,7 +26,7 @@ export default function Login() {
 
   const login = (e) => {
     e.preventDefault();
-    fetch(`https://outside-friend-jump-convicted.trycloudflare.com/login`, {
+    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

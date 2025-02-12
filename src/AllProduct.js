@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./css/product.css";
 import { Link } from "react-router-dom";
 import Header from "./header";
-import { FaStar } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
 
 export default function AllProduct() {
   const [product, setProduct] = useState([]);
@@ -12,31 +12,36 @@ export default function AllProduct() {
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [favorites, setFavorites] = useState(new Set());
-  const [user, setUser] = useState({});
+  const [sortBy, setSortBy] = useState("");
+
+  useEffect(() => {
+    document.title = "product";
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     const searchParam = searchQuery ? `&search=${searchQuery}` : "";
     const categoryParam = category ? `&category=${category}` : "";
+    const sortParam = sortBy ? `&sortBy=${sortBy}` : "";
     let minPrice = 0,
       maxPrice = "";
-    if (priceRange === "0-500") {
+    if (priceRange === "0-1000") {
       minPrice = 0;
-      maxPrice = 500;
-    } else if (priceRange === "500-1000") {
-      minPrice = 500;
       maxPrice = 1000;
-    } else if (priceRange === "1000-5000") {
+    } else if (priceRange === "1000-2000") {
       minPrice = 1000;
-      maxPrice = 5000;
-    } else if (priceRange === "5000+") {
-      minPrice = 5000;
+      maxPrice = 2000;
+    } else if (priceRange === "2000-10000") {
+      minPrice = 2000;
+      maxPrice = 10000;
+    } else if (priceRange === "10000+") {
+      minPrice = 10000;
       maxPrice = "";
     }
     const priceParam = maxPrice
       ? `&minPrice=${minPrice}&maxPrice=${maxPrice}`
       : `&minPrice=${minPrice}`;
-    const url = `https://outside-friend-jump-convicted.trycloudflare.com/allproduct?page=${currentPage}${searchParam}${categoryParam}${priceParam}`;
+    const url = `https://logos-annex-qualifying-bob.trycloudflare.com/allproduct?page=${currentPage}${searchParam}${categoryParam}${priceParam}${sortParam}`;
 
     fetch(url, {
       headers: {
@@ -51,7 +56,7 @@ export default function AllProduct() {
       })
       .catch((err) => console.log("Error fetching products:", err));
 
-    fetch(`https://outside-friend-jump-convicted.trycloudflare.com/favorites`, {
+    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/favorites`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -64,7 +69,7 @@ export default function AllProduct() {
         setFavorites(favoriteProductIds);
       })
       .catch((err) => console.log("Error fetching favorites:", err));
-  }, [currentPage, searchQuery, category, priceRange]);
+  }, [currentPage, searchQuery, category, priceRange, sortBy]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -91,7 +96,7 @@ export default function AllProduct() {
       const isCurrentlyFavorite = favorites.has(id);
 
       const response = await fetch(
-        `https://outside-friend-jump-convicted.trycloudflare.com/toggle-favorite/${id}`,
+        `https://logos-annex-qualifying-bob.trycloudflare.com/toggle-favorite/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -122,21 +127,6 @@ export default function AllProduct() {
     }
   };
 
-  useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("authToken");
-      fetch("https://outside-friend-jump-convicted.trycloudflare.com/user", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-        .then((res) => res.json())
-        .then((user) => {
-          setUser(user);
-        })
-        .catch((err) => console.log(err));
-    };
-    getUser();
-  }, []);
-
   return (
     <>
       <Header />
@@ -162,10 +152,16 @@ export default function AllProduct() {
 
       <select onChange={handlePriceChange} value={priceRange}>
         <option value="">Select Price Range</option>
-        <option value="0-500">₹0 - ₹500</option>
-        <option value="500-1000">₹500 - ₹1000</option>
-        <option value="1000-5000">₹1000 - ₹5000</option>
-        <option value="5000+">₹5000+</option>
+        <option value="0-1000">₹0 - ₹1000</option>
+        <option value="1000-2000">₹1000 - ₹2000</option>
+        <option value="2000-10000">₹2000 - ₹10000</option>
+        <option value="10000+">₹10000+</option>
+      </select>
+
+      <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+        <option value="">Sort By</option>
+        <option value="lowToHigh">Price: Low to High</option>
+        <option value="highToLow">Price: High to Low</option>
       </select>
 
       <div className="product-container">
@@ -178,21 +174,30 @@ export default function AllProduct() {
                   className="favorite-icon"
                   onClick={() => toggleFavorite(item._id)}
                   style={{
-                    color: favorites.has(item._id) ? "yellow" : "gray",
+                    color: favorites.has(item._id) ? "red" : "gray",
                     cursor: "pointer",
                   }}
                 >
-                  <FaStar />
+                  <FaHeart />
                 </span>
 
                 <img
-                  src={`https://outside-friend-jump-convicted.trycloudflare.com/${item.image}`}
+                  src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.image}`}
                   loading="lazy"
                   alt={item.title}
                 />
                 <h2>{item.title}</h2>
                 <p>{item.description}</p>
                 <div className="price">₹{item.price}</div>
+                <div className="product-card">
+                  <p>
+                    Average Rating:
+                    {Array.from(
+                      { length: Math.round(item.avgRating) },
+                      (_, i) => "⭐"
+                    ).join("")}
+                  </p>
+                </div>
 
                 <Link to={`/detail/${item._id}`}>
                   <button type="button">Detail View</button>

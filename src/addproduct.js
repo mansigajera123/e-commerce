@@ -31,14 +31,11 @@ export default function AddProduct() {
     formData.append("category", productData.category);
     formData.append("image", productData.image);
 
-    fetch(
-      "https://outside-friend-jump-convicted.trycloudflare.com/addproduct",
-      {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      }
-    )
+    fetch("https://logos-annex-qualifying-bob.trycloudflare.com/addproduct", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    })
       .then((res) => res.json())
       .then(() => {
         setProductData({
@@ -110,7 +107,8 @@ export default function AddProduct() {
             <option value="Kitchen Item">Kitchen Item</option>
             <option value="Beauty Product">Beauty Product</option>
           </select>
-
+          <br />
+          <br />
           <button type="submit">Add Product</button>
         </form>
       </div>

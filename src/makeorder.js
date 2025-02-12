@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "./header";
+import "./css/cart.css";
 
 export default function MakeOrder() {
   const [cart, setCart] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { message } = location.state || {};
 
   useEffect(() => {
     const getCart = () => {
       const token = localStorage.getItem("authToken");
 
-      fetch("https://outside-friend-jump-convicted.trycloudflare.com/cart", {
+      fetch("https://logos-annex-qualifying-bob.trycloudflare.com/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -30,7 +33,6 @@ export default function MakeOrder() {
           }
         })
         .catch((err) => {
-          console.error("Error fetching cart:", err);
           setCart([]);
         });
     };
@@ -41,20 +43,17 @@ export default function MakeOrder() {
   const handleOrder2 = () => {
     const token = localStorage.getItem("authToken");
 
-    fetch(
-      "https://outside-friend-jump-convicted.trycloudflare.com/place-order",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    )
+    fetch("https://logos-annex-qualifying-bob.trycloudflare.com/place-order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.message === "Order placed successfully") {
-          alert("✅ Order placed successfully!");
+          handlePayment();
         } else {
           alert("Failed to place order: " + (data.message || "Unknown error"));
         }
@@ -62,29 +61,6 @@ export default function MakeOrder() {
       .catch((err) => {
         alert("Network error. Please try again.");
       });
-  };
-
-  const handleOrder = () => {
-    const token = localStorage.getItem("authToken");
-    fetch(`https://outside-friend-jump-convicted.trycloudflare.com/order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ items: cart }),
-    })
-      .then((res) => res.blob())
-      .then((blob) => {
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "order.pdf";
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      })
-      .catch((err) => console.log(err));
   };
 
   const handlePayment = () => {
@@ -111,33 +87,22 @@ export default function MakeOrder() {
                 <p className="product-price">Price: ₹{item.productId.price}</p>
               </div>
               <img
-                src={`https://outside-friend-jump-convicted.trycloudflare.com/${item.productId.image}`}
+                src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.productId.image}`}
                 loading="lazy"
                 alt={item.productId.title}
                 className="product-image"
               />
             </li>
           ))}
-          <button className="btn" onClick={handleOrder2}>
-            Order
-          </button>
-
-          <button
-            className="btn"
-            type="order"
-            onClick={handleOrder}
-            disabled={totalPrice <= 0}
-          >
-            Bill
-          </button>
-
-          <button
-            className="btn"
-            onClick={handlePayment}
-            disabled={totalPrice <= 0}
-          >
-            Proceed to Payment
-          </button>
+          <div className="button-container">
+            <button
+              className="btn"
+              onClick={handleOrder2}
+              disabled={message === "payment successful"}
+            >
+              Order
+            </button>
+          </div>
         </ul>
       )}
     </>

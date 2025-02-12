@@ -85,21 +85,24 @@ header {
 
 /* .btns */
 .btn {
+  justify-content: center;
+  align-items: center;
   background-color: #28a745;
   color: white;
   border: none;
   padding: 12px 20px;
   font-size: 1rem;
-  margin: 10px 0;
   cursor: pointer;
   border-radius: 8px;
   transition: background-color 0.3s ease;
-  justify-content: center;
 }
-
-.btn:hover {
+.btn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+/* .btn:hover {
   background-color: #218838;
-}
+} */
 
 .btn[type="order"] {
   background-color: #334c69;
@@ -175,6 +178,19 @@ header {
 .button-container {
   display: flex;
   justify-content: center; /* Centers the button horizontally */
-  align-items: center;     /* Centers the button vertically */
-  height: 100%;             /* Optional: ensures the container takes up full height */
+  align-items: center; /* Centers the button vertically */
+  height: 100%; /* Optional: ensures the container takes up full height */
+}
+.delete-btn {
+  background-color: white;
+  border: none;
+  color: red;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  transform: scale(1.2);
 }

@@ -10,7 +10,7 @@ const FavoriteProducts = () => {
       try {
         const token = localStorage.getItem("authToken");
         const response = await fetch(
-          "https://outside-friend-jump-convicted.trycloudflare.com/favorites",
+          "https://logos-annex-qualifying-bob.trycloudflare.com/favorites",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -40,7 +40,7 @@ const FavoriteProducts = () => {
     try {
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        `https://outside-friend-jump-convicted.trycloudflare.com/favorites/${productId}`,
+        `https://logos-annex-qualifying-bob.trycloudflare.com/favorites/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -75,7 +75,7 @@ const FavoriteProducts = () => {
             {favoritesList.map((product) => (
               <div key={product._id} className="product-card">
                 <img
-                  src={`https://outside-friend-jump-convicted.trycloudflare.com/${product.image}`}
+                  src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
                   alt={product.title}
                   loading="lazy"
                 />
