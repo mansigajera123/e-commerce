@@ -45,14 +45,21 @@ export default function Product() {
         <div className="product-list">
           {product.map((item) => (
             <div key={item._id} className="product-card">
-              <img
-                src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.image}`}
-                alt={item.title}
-                loading="lazy"
-              />
-              <h2>{item.title}</h2>
-              <p>{item.description}</p>
-              <div className="price">₹{item.price}</div>
+              <Link
+                to={`/detail/${item._id}`}
+                key={product._id}
+                className="product-card"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <img
+                  src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.image}`}
+                  alt={item.title}
+                  loading="lazy"
+                />
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+                <div className="price">₹{item.price}</div>
+              </Link>
               <button type="delete" onClick={() => deleteProduct(item._id)}>
                 Delete
               </button>

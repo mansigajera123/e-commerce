@@ -52,6 +52,7 @@ header {
 .product-title {
   font-size: 1.25rem;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 .product-quantity,

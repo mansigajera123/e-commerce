@@ -79,6 +79,8 @@ export default function Orders() {
                   </li>
                 ))}
               </ul>
+              <h4 className="payment-status">{order.paymentStatus}</h4>
+
               <button
                 className="invoice-button"
                 onClick={() => generatePdf(order._id)}

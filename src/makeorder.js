@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Header from "./header";
 import "./css/cart.css";
 
@@ -86,6 +86,7 @@ export default function MakeOrder() {
                 <p className="product-quantity">Quantity: {item.quantity}</p>
                 <p className="product-price">Price: ₹{item.productId.price}</p>
               </div>
+
               <img
                 src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.productId.image}`}
                 loading="lazy"

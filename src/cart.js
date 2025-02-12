@@ -80,6 +80,7 @@ export default function Cart() {
                 <h2 className="product-title">{item.productId.title}</h2>
                 <p className="product-quantity">Quantity: {item.quantity}</p>
                 <p className="product-price">Price: ₹{item.productId.price}</p>
+
                 <button
                   className="delete-btn"
                   onClick={() => deleteCartItem(item.productId._id)}

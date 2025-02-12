@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "./header";
 import "./css/favourite.css";
+import { Link } from "react-router-dom";
 
 const FavoriteProducts = () => {
   const [favoritesList, setFavoritesList] = useState([]);
@@ -74,14 +75,21 @@ const FavoriteProducts = () => {
           <div className="favorites-list">
             {favoritesList.map((product) => (
               <div key={product._id} className="product-card">
-                <img
-                  src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
-                  alt={product.title}
-                  loading="lazy"
-                />
-                <h2>{product.title}</h2>
-                <p>{product.description}</p>
-                <div className="price">₹{product.price}</div>
+                <Link
+                  to={`/detail/${product._id}`}
+                  key={product._id}
+                  className="product-card"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <img
+                    src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
+                    alt={product.title}
+                    loading="lazy"
+                  />
+                  <h2>{product.title}</h2>
+                  <p>{product.description}</p>
+                  <div className="price">₹{product.price}</div>
+                </Link>
                 <button
                   className="remove-btn"
                   onClick={() => removeFromFavorites(product._id)}
