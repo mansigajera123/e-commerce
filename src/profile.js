@@ -126,6 +126,7 @@ export default function Profiler() {
               onChange={handleInputChange}
               placeholder="Address"
             />
+
             <button type="submit" className="profile-submit-btn">
               Update Profile
             </button>
