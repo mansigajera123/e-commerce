@@ -22,7 +22,7 @@ function CheckoutForm({ amount }) {
     setPaymentProcessing(true);
 
     const response = await fetch(
-      `https://logos-annex-qualifying-bob.trycloudflare.com/payment-intent`,
+      `https://believed-holder-univ-direction.trycloudflare.com/payment-intent`,
       {
         method: "POST",
         body: JSON.stringify({ amount }),
@@ -56,7 +56,7 @@ function CheckoutForm({ amount }) {
         setPaymentProcessing(false);
         navigate("/Makeorder", { state: { message: "payment successful" } });
         const confirmResponse = await fetch(
-          "https://logos-annex-qualifying-bob.trycloudflare.com/confirm-order",
+          "https://believed-holder-univ-direction.trycloudflare.com/confirm-order",
           {
             method: "POST",
             headers: {

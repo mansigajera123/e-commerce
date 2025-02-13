@@ -15,7 +15,7 @@ export default function Cart() {
   const fetchCart = () => {
     const token = localStorage.getItem("authToken");
 
-    fetch("https://logos-annex-qualifying-bob.trycloudflare.com/cart", {
+    fetch("https://believed-holder-univ-direction.trycloudflare.com/cart", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -43,7 +43,7 @@ export default function Cart() {
     const token = localStorage.getItem("authToken");
 
     fetch(
-      `https://logos-annex-qualifying-bob.trycloudflare.com/cart/${productId}`,
+      `https://believed-holder-univ-direction.trycloudflare.com/cart/${productId}`,
       {
         method: "DELETE",
         headers: {
@@ -89,7 +89,7 @@ export default function Cart() {
                 </button>
               </div>
               <img
-                src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.productId.image}`}
+                src={`https://believed-holder-univ-direction.trycloudflare.com/${item.productId.image}`}
                 loading="lazy"
                 alt={item.productId.title}
                 className="product-image"
@@ -100,7 +100,7 @@ export default function Cart() {
       )}
 
       <div className="cart-total">
-        <h3>Total Price: ₹{totalPrice}</h3>
+        <h3>Total Price: ₹ {totalPrice}</h3>
       </div>
       <br />
       <div className="button-container">

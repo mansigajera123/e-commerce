@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Header from "./header";
 import "./css/cart.css";
 
@@ -14,7 +14,7 @@ export default function MakeOrder() {
     const getCart = () => {
       const token = localStorage.getItem("authToken");
 
-      fetch("https://logos-annex-qualifying-bob.trycloudflare.com/cart", {
+      fetch("https://believed-holder-univ-direction.trycloudflare.com/cart", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,13 +43,16 @@ export default function MakeOrder() {
   const handleOrder2 = () => {
     const token = localStorage.getItem("authToken");
 
-    fetch("https://logos-annex-qualifying-bob.trycloudflare.com/place-order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      "https://believed-holder-univ-direction.trycloudflare.com/place-order",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.message === "Order placed successfully") {
@@ -88,7 +91,7 @@ export default function MakeOrder() {
               </div>
 
               <img
-                src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.productId.image}`}
+                src={`https://believed-holder-univ-direction.trycloudflare.com/${item.productId.image}`}
                 loading="lazy"
                 alt={item.productId.title}
                 className="product-image"

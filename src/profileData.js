@@ -9,7 +9,7 @@ export default function ProfileData() {
   useEffect(() => {
     const getUser = () => {
       const token = localStorage.getItem("authToken");
-      fetch("https://logos-annex-qualifying-bob.trycloudflare.com/user", {
+      fetch("https://believed-holder-univ-direction.trycloudflare.com/user", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())

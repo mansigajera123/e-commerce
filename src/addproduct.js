@@ -31,11 +31,14 @@ export default function AddProduct() {
     formData.append("category", productData.category);
     formData.append("image", productData.image);
 
-    fetch("https://logos-annex-qualifying-bob.trycloudflare.com/addproduct", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
-    })
+    fetch(
+      "https://believed-holder-univ-direction.trycloudflare.com/addproduct",
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      }
+    )
       .then((res) => res.json())
       .then(() => {
         setProductData({
@@ -84,13 +87,6 @@ export default function AddProduct() {
             onChange={(e) => dataHandler("description", e.target.value)}
             required
           />
-          {/* <label htmlFor="category">Category</label>
-          <input
-            type="text"
-            name="category"
-            onChange={(e) => dataHandler("category", e.target.value)}
-            required
-          /> */}
 
           <label htmlFor="category">Category</label>
           <select

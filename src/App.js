@@ -16,6 +16,7 @@ import Profile from "./profile";
 import ProfileData from "./profileData";
 import Orders from "./order";
 import MakeOrder from "./makeorder";
+import OrderDetail from "./orderDetail";
 
 function App() {
   const router = createBrowserRouter([
@@ -86,6 +87,10 @@ function App() {
     {
       path: "/Makeorder",
       element: <MakeOrder />,
+    },
+    {
+      path: "/order-detail/:id",
+      element: <OrderDetail />,
     },
   ]);
   return (

@@ -16,12 +16,15 @@ export default function EditProduct() {
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
-    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/detail/${id}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      `https://believed-holder-univ-direction.trycloudflare.com/detail/${id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -54,12 +57,15 @@ export default function EditProduct() {
     formData.append("category", productData.category);
     formData.append("description", productData.description);
     formData.append("image", productData.image);
-    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/edit/${id}`, {
-      method: "PUT",
-      headers: { Authorization: `Bearer ${token}` },
+    fetch(
+      `https://believed-holder-univ-direction.trycloudflare.com/edit/${id}`,
+      {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` },
 
-      body: formData,
-    })
+        body: formData,
+      }
+    )
       .then((res) => res.json())
       .then((user) => {
         setproductData({

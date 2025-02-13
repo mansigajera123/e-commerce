@@ -41,7 +41,7 @@ export default function AllProduct() {
     const priceParam = maxPrice
       ? `&minPrice=${minPrice}&maxPrice=${maxPrice}`
       : `&minPrice=${minPrice}`;
-    const url = `https://logos-annex-qualifying-bob.trycloudflare.com/allproduct?page=${currentPage}${searchParam}${categoryParam}${priceParam}${sortParam}`;
+    const url = `https://believed-holder-univ-direction.trycloudflare.com/allproduct?page=${currentPage}${searchParam}${categoryParam}${priceParam}${sortParam}`;
 
     fetch(url, {
       headers: {
@@ -56,11 +56,14 @@ export default function AllProduct() {
       })
       .catch((err) => console.log("Error fetching products:", err));
 
-    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/favorites`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    fetch(
+      `https://believed-holder-univ-direction.trycloudflare.com/favorites`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         const favoriteProductIds = new Set(
@@ -96,7 +99,7 @@ export default function AllProduct() {
       const isCurrentlyFavorite = favorites.has(id);
 
       const response = await fetch(
-        `https://logos-annex-qualifying-bob.trycloudflare.com/toggle-favorite/${id}`,
+        `https://believed-holder-univ-direction.trycloudflare.com/toggle-favorite/${id}`,
         {
           method: "PATCH",
           headers: {
@@ -182,7 +185,7 @@ export default function AllProduct() {
                 </span>
 
                 <img
-                  src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.image}`}
+                  src={`https://believed-holder-univ-direction.trycloudflare.com/${item.image}`}
                   loading="lazy"
                   alt={item.title}
                 />

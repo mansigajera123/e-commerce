@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "./header";
 import "./css/order.css";
+import { Link } from "react-router-dom";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -9,11 +10,14 @@ export default function Orders() {
     const fetchOrders = () => {
       const token = localStorage.getItem("authToken");
 
-      fetch("https://logos-annex-qualifying-bob.trycloudflare.com/my-orders", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      fetch(
+        "https://believed-holder-univ-direction.trycloudflare.com/my-orders",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           const successfulOrders = data.filter(
@@ -31,7 +35,7 @@ export default function Orders() {
     const token = localStorage.getItem("authToken");
 
     fetch(
-      `https://logos-annex-qualifying-bob.trycloudflare.com/order-invoice/${id}`,
+      `https://believed-holder-univ-direction.trycloudflare.com/order-invoice/${id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -62,24 +66,29 @@ export default function Orders() {
         <ul className="order-list">
           {orders.map((order) => (
             <li key={order._id} className="order-item">
-              <h3>Order ID: {order._id}</h3>
-              <p>Date: {new Date(order.createdAt).toLocaleString()}</p>
-              <ul>
-                {order.products.map((item, index) => (
-                  <li key={index}>
-                    <img
-                      src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.product.image}`}
-                      alt={item.product.title}
-                      width="50"
-                    />
-                    <span>
-                      {item.product.title} - ₹{item.product.price} x{" "}
-                      {item.quantity}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <h4 className="payment-status">{order.paymentStatus}</h4>
+              <Link
+                to={`/order-detail/${order._id}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <h3>Order ID: {order._id}</h3>
+                <p>Date: {new Date(order.createdAt).toLocaleString()}</p>
+
+                <ul>
+                  {order.products.map((item, index) => (
+                    <li key={index}>
+                      <img
+                        src={`https://believed-holder-univ-direction.trycloudflare.com/${item.product.image}`}
+                        alt={item.product.title}
+                        width="50"
+                      />
+                      <span>
+                        {item.product.title} - ₹{item.product.price} x{" "}
+                        {item.quantity}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </Link>
 
               <button
                 className="invoice-button"

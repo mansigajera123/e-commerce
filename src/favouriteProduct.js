@@ -11,7 +11,7 @@ const FavoriteProducts = () => {
       try {
         const token = localStorage.getItem("authToken");
         const response = await fetch(
-          "https://logos-annex-qualifying-bob.trycloudflare.com/favorites",
+          "https://believed-holder-univ-direction.trycloudflare.com/favorites",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ const FavoriteProducts = () => {
     try {
       const token = localStorage.getItem("authToken");
       const response = await fetch(
-        `https://logos-annex-qualifying-bob.trycloudflare.com/favorites/${productId}`,
+        `https://believed-holder-univ-direction.trycloudflare.com/favorites/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -82,7 +82,7 @@ const FavoriteProducts = () => {
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <img
-                    src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
+                    src={`https://believed-holder-univ-direction.trycloudflare.com/${product.image}`}
                     alt={product.title}
                     loading="lazy"
                   />

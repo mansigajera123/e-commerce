@@ -24,7 +24,7 @@ export default function SignUp() {
 
   const signUp = (e) => {
     e.preventDefault();
-    fetch("https://logos-annex-qualifying-bob.trycloudflare.com/signup", {
+    fetch("https://believed-holder-univ-direction.trycloudflare.com/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),

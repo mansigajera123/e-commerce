@@ -9,9 +9,12 @@ export default function Product() {
   useEffect(() => {
     const getProduct = () => {
       const token = localStorage.getItem("authToken");
-      fetch("https://logos-annex-qualifying-bob.trycloudflare.com/product/", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      fetch(
+        "https://believed-holder-univ-direction.trycloudflare.com/product/",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
         .then((res) => res.json())
         .then((product) => {
           setProduct(product);
@@ -24,10 +27,13 @@ export default function Product() {
   const deleteProduct = (id) => {
     const token = localStorage.getItem("authToken");
 
-    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/delete/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    fetch(
+      `https://believed-holder-univ-direction.trycloudflare.com/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
       .then((res) => res.json())
       .then(() => {
         setProduct((prevProduct) =>
@@ -52,7 +58,7 @@ export default function Product() {
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <img
-                  src={`https://logos-annex-qualifying-bob.trycloudflare.com/${item.image}`}
+                  src={`https://believed-holder-univ-direction.trycloudflare.com/${item.image}`}
                   alt={item.title}
                   loading="lazy"
                 />

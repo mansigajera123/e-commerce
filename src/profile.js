@@ -19,7 +19,7 @@ export default function Profiler() {
 
       try {
         const response = await fetch(
-          "https://logos-annex-qualifying-bob.trycloudflare.com/get-profile",
+          "https://believed-holder-univ-direction.trycloudflare.com/get-profile",
           {
             method: "GET",
             headers: {
@@ -62,7 +62,7 @@ export default function Profiler() {
 
     try {
       const response = await fetch(
-        "https://logos-annex-qualifying-bob.trycloudflare.com/update-profile",
+        "https://believed-holder-univ-direction.trycloudflare.com/update-profile",
         {
           method: "PUT",
           headers: {

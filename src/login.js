@@ -26,7 +26,7 @@ export default function Login() {
 
   const login = (e) => {
     e.preventDefault();
-    fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/login`, {
+    fetch(`https://believed-holder-univ-direction.trycloudflare.com/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

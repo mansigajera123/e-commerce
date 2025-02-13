@@ -16,7 +16,7 @@ export default function ResetPassword() {
     }
 
     fetch(
-      `https://logos-annex-qualifying-bob.trycloudflare.com/reset-password/${token}`,
+      `https://believed-holder-univ-direction.trycloudflare.com/reset-password/${token}`,
       {
         method: "POST",
         headers: {

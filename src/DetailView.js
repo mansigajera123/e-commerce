@@ -15,7 +15,7 @@
 //     const detailsView = () => {
 //       const token = localStorage.getItem("authToken");
 //       fetch(
-//         `https://logos-annex-qualifying-bob.trycloudflare.com/detail/${id}`,
+//         `https://believed-holder-univ-direction.trycloudflare.com/detail/${id}`,
 //         {
 //           headers: { Authorization: `Bearer ${token}` },
 //         }
@@ -33,7 +33,7 @@
 //   const addtoCart = (productId, quantity = 1) => {
 //     const token = localStorage.getItem("authToken");
 
-//     fetch(`https://logos-annex-qualifying-bob.trycloudflare.com/addtocart`, {
+//     fetch(`https://believed-holder-univ-direction.trycloudflare.com/addtocart`, {
 //       method: "POST",
 //       headers: {
 //         Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@
 //     const token = localStorage.getItem("authToken");
 
 //     fetch(
-//       `https://logos-annex-qualifying-bob.trycloudflare.com/${id}/reviews`,
+//       `https://believed-holder-univ-direction.trycloudflare.com/${id}/reviews`,
 //       {
 //         method: "POST",
 //         headers: {
@@ -81,7 +81,7 @@
 //       <div className="detail-view-container">
 //         <h1 className="product-title">{product.title}</h1>
 //         <img
-//           src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
+//           src={`https://believed-holder-univ-direction.trycloudflare.com/${product.image}`}
 //           alt={product.title}
 //           className="product-image"
 //           onClick={handleImageClick}
@@ -94,7 +94,7 @@
 //                 &times;
 //               </span>
 //               <img
-//                 src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
+//                 src={`https://believed-holder-univ-direction.trycloudflare.com/${product.image}`}
 //                 alt={product.title}
 //                 className="modal-image"
 //               />
@@ -205,7 +205,7 @@ export default function DetailView() {
       const token = localStorage.getItem("authToken");
       try {
         const res = await fetch(
-          `https://logos-annex-qualifying-bob.trycloudflare.com/detail/${id}`,
+          `https://believed-holder-univ-direction.trycloudflare.com/detail/${id}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -225,7 +225,7 @@ export default function DetailView() {
       const token = localStorage.getItem("authToken");
       try {
         const res = await fetch(
-          `https://logos-annex-qualifying-bob.trycloudflare.com/${id}/reviews`,
+          `https://believed-holder-univ-direction.trycloudflare.com/${id}/reviews`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -244,7 +244,7 @@ export default function DetailView() {
     const token = localStorage.getItem("authToken");
     try {
       await fetch(
-        `https://logos-annex-qualifying-bob.trycloudflare.com/addtocart`,
+        `https://believed-holder-univ-direction.trycloudflare.com/addtocart`,
         {
           method: "POST",
           headers: {
@@ -264,7 +264,7 @@ export default function DetailView() {
 
     try {
       const res = await fetch(
-        `https://logos-annex-qualifying-bob.trycloudflare.com/${id}/reviews`,
+        `https://believed-holder-univ-direction.trycloudflare.com/${id}/reviews`,
         {
           method: "POST",
           headers: {
@@ -293,7 +293,7 @@ export default function DetailView() {
       <div className="detail-view-container">
         <h1 className="product-title">{product.title}</h1>
         <img
-          src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
+          src={`https://believed-holder-univ-direction.trycloudflare.com/${product.image}`}
           alt={product.title}
           className="product-image"
           onClick={handleImageClick}
@@ -306,7 +306,7 @@ export default function DetailView() {
                 &times;
               </span>
               <img
-                src={`https://logos-annex-qualifying-bob.trycloudflare.com/${product.image}`}
+                src={`https://believed-holder-univ-direction.trycloudflare.com/${product.image}`}
                 alt={product.title}
                 className="modal-image"
               />

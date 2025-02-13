@@ -93,3 +93,6 @@
     font-size: 0.9rem;
   }
 }
+.payment-status {
+  color: green;
+}
