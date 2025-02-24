@@ -70,9 +70,6 @@ export default function Orders() {
                 to={`/order-detail/${order._id}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <h3>Order ID: {order._id}</h3>
-                <p>Date: {new Date(order.createdAt).toLocaleString()}</p>
-
                 <ul>
                   {order.products.map((item, index) => (
                     <li key={index}>
